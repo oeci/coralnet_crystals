@@ -24,3 +24,21 @@ First, define a list of paths to directories containing csvs:
 ```
 paths = ["/Volumes/T7/SEM_image_analysis/NA165-136/", ..., "/Volumes/T7/SEM_image_analysis/NA165-195/"]
 ```
+Next, iterate over paths list and call the first few methods in class FileReader. Note: see comments in script to understand required directory layout.
+
+```
+final_df = {}
+ind_df = {}
+for path in paths:
+    reader = FileReader(path)
+    file_lists = reader.csv_list()
+    raw_data = reader.read_csvs(file_lists)
+
+    sample_id = path.rstrip("/").split("-")[-1]
+
+    ind_df[sample_id] = raw_data
+
+    final_df[sample_id] = reader.combine_csvs(raw_data)
+```
+
+
