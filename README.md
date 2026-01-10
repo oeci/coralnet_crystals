@@ -13,6 +13,6 @@ The Fiji (ImageJ) code was used to process and organize data previously collecte
 
 This code should only be used on the first set of data collected.
 
-However, Fiji is still used to scale images processed in CoralNet-Toolbox from pixels to micrometers.
+However, Fiji is still used to scale images processed in CoralNet-Toolbox from pixels to micrometers (see step 3).
 
-These scripts are still being streamlined and revised, but if you would like to use them but don't know where to start please reach out to me at: jacob.tomer@uri.edu.
+These scripts are still being streamlined and revised, but if you would like to use them and don't know where to start please reach out to me at: jacob.tomer@uri.edu.
