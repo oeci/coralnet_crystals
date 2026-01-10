@@ -20,6 +20,7 @@ These scripts are still being streamlined and revised, but if you would like to 
 How to use the Fiji script:
 
 First, define a list of paths to directories containing csvs:
-'''
+
+```
 paths = ["/Volumes/T7/SEM_image_analysis/NA165-136/", ..., "/Volumes/T7/SEM_image_analysis/NA165-195/"]
-'''
+```
