@@ -40,5 +40,29 @@ for path in paths:
 
     final_df[sample_id] = reader.combine_csvs(raw_data)
 ```
+The final dataframe, or final_df, will be used in the class CrystalAnalysis to determine crystallinity
+
+```
+analysis_136 = CrystalAnalysis(
+    metadata_path="/Volumes/T7/SEM_image_analysis/Crystal_Data/metadata_136.csv",
+    pyroxene_df=final_df["136"]["Pyroxene"]["crys"],
+    olivine_df=final_df["136"]["Olivine"]["crys"],
+    feldspar_df=final_df["136"]["Feldspar"]["crys"]
+)
+crystallinity_136 = analysis_136.calculate_crystallinity()
+
+```
+Notice that the class requires a metadata file that is made by hand and formatted in a very specific way. Please email me if you have questions regarding it (see email above).
+
+The line:
+```
+crystallinity_136 = analysis_136.calculate_crystallinity()
+
+```
+
+Will calculate crystallinity in percent area (um^2) for feldspar, pyroxene, and olivine with a correction for vesicularity which is included in the metadata file and is unique to each image processed.
+
+
+
 
 
