@@ -57,10 +57,17 @@ Notice that the class requires a metadata file that is made by hand and formatte
 The line:
 ```
 crystallinity_136 = analysis_136.calculate_crystallinity()
-
 ```
 
 Will calculate crystallinity in percent area (um^2) for feldspar, pyroxene, and olivine with a correction for vesicularity which is included in the metadata file and is unique to each image processed.
+
+To visualize crystallinity data as a bar chart, call this method and input the crystallinity:
+
+```
+CrystalVisualization.plot_crystallinity(crystallinity_136, "Crystallinity NA165-136")
+```
+This code is challenging to implement and use for Fiji crystal counts due to its detailed workflow, and could break for unexpected reasons. The CoralNet-Toolbox scripts are more generalized and, therefore, easier to use. It is recommended that any future annotations be made in CoralNet-Toolbox.
+
 
 
 
