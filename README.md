@@ -2,7 +2,7 @@
 ## Introduction
 ***
 
-# The code and readme in this repository are a work in progress.
+### The code and readme in this repository are a work in progress.
 
 This repository has a collection of scripts meant for processing crystal shape parameter data either from Fiji (ImageJ) or CoralNet-Toolbox.
 
