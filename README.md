@@ -80,7 +80,7 @@ This code is challenging to implement and use for Fiji crystal counts due to its
 ***
 ## CoralNet-Toolbox Annotation Processing Workflow
 ***
-To create metadata files containing image size and scale for each image it is recommended that you run the Fiji macro listed below to create the intial spreadsheet. The rest must be done by hand in excel, but since all images for one sample are the same size you will only need to find the scale for one and apply it to all image sizes in the spreadsheet.
+To create metadata files containing image size and scale for each image it is recommended that you run the Fiji macro listed below to create the intial spreadsheet. The rest must be done by hand in excel, but since all images for one sample are the same size you will only need to find the scale for one image and apply it to all image sizes in the spreadsheet.
 
 ```
 // Choose a folder
