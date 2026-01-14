@@ -1,3 +1,9 @@
+***
+## Introduction
+***
+
+# The code and readme in this repository are a work in progress.
+
 This repository has a collection of scripts meant for processing crystal shape parameter data either from Fiji (ImageJ) or CoralNet-Toolbox.
 
 CoralNet-Toolbox has annotations exported in a json format requiring parsing and data organization in dictionaries/ lists prior to processing and visualization.
@@ -8,6 +14,10 @@ To successfully use the suite of CoralNet-Toolbox scripts we have here, we sugge
 2. Having the requisite packages installed such as: Pillow (aka PIL), cv2 (opencv-python), & json. The other packages should already be installed.
 3. Making sure metadata files are available and have been created by hand.
 4. Running one sample at a time. Classes may be implemented in the future to ease iteration over a directory of CoralNet-Toolbox annotations (one per project).
+
+***
+## Fiji Image Processing Workflow
+***
 
 The Fiji (ImageJ) code was used to process and organize data previously collected in Fiji.
 
@@ -67,7 +77,77 @@ To visualize crystallinity data as a bar chart, call this method and input the c
 CrystalVisualization.plot_crystallinity(crystallinity_136, "Crystallinity NA165-136")
 ```
 This code is challenging to implement and use for Fiji crystal counts due to its detailed workflow, and could break for unexpected reasons. The CoralNet-Toolbox scripts are more generalized and, therefore, easier to use. It is recommended that any future annotations be made in CoralNet-Toolbox.
+***
+## CoralNet-Toolbox Annotation Processing Workflow
+***
+To create metadata files containing image size and scale for each image it is recommended that you run the Fiji macro listed below to create the intial spreadsheet. The rest must be done by hand in excel, but since all images for one sample are the same size you will only need to find the scale for one and apply it to all image sizes in the spreadsheet.
 
+```
+// Choose a folder
+dir = getDirectory("/Users/jrtomer/Documents/SURFO/Batch4/NA165-191(2)/Crystals/");
+list = getFileList(dir);
+
+// Clear Results
+run("Clear Results");
+
+for (i = 0; i < list.length; i++) {
+
+    path = dir + list[i];
+
+    // Skip directories
+    if (File.isDirectory(path)) {
+        continue;
+    }
+
+    // Try opening image (some files may not be images)
+    open(path);
+
+    // Get width, height, depth
+    w = getWidth();
+    h = getHeight();
+    d = bitDepth();
+
+    // Add to Results table
+    setResult("Filename", i, list[i]);
+    setResult("Width",    i, w);
+    setResult("Height",   i, h);
+    setResult("BitDepth", i, d);
+
+    // Close image
+    close();
+}
+
+// Show results
+updateResults();
+```
+
+The CoralNet-Toolbox scripts follow a simple order. Crystallinity -> CSDs.
+
+It is recommended that you run crystallinity first then export the organized data using this code block not included in the script here:
+
+```
+for area in area_list:
+    area_scaled.append(area/(scale**2))
+
+coralnet_export = []
+for maj, mino, area, lab, image in zip(lengths, minor, area_scaled, label_list, image_path):
+    coralnet_export.append({
+        "Sample": image[27:36],
+        "Image": image[49:68],
+        "Major": maj,
+        "Minor": mino,
+        "Area": area,
+        "Label": lab
+        })
+
+
+tmp_df = pd.DataFrame(coralnet_export)
+tmp_df.to_csv("/Volumes/NA171-DE/CoralNet/Processing/191_data.csv", index = False)
+```
+
+It is important to note that based off of your directory path that the index for the sample name and image number will change. Adjust these accordingly.
+
+It will export the dataframe to a csv and this should be added to the "master" csv not included in this repository. If you would like it please send me an email at jacob.tomer@uri.edu.
 
 
 
